@@ -44,4 +44,20 @@ describe 'creating todolists' do
    visit '/todolists'
    expect(page).not_to have_content("My description")
  end
+ it 'display an error when todolist description is empty' do
+   expect(Todolist.count).to eq(0)
+
+   visit '/todolists'
+   click_link 'New Todolist'
+   expect(page).to have_content("New Todolist")
+
+   fill_in 'Title', with: 'My title'
+   fill_in 'Description', with: ""
+   click_button 'Create Todolist'
+   expect(page).to have_content('error')
+
+   expect(Todolist.count).to eq(0)
+   visit '/todolists'
+   expect(page).not_to have_content("My title")
 end
+end 
