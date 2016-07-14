@@ -1,1 +1,7 @@
 <h1><%= @todolist.title %></h1>
+
+<ul>
+  <% @todolist.items.each do |item| %>
+    <li><%= item.id %> - <%= item.content %> </li>
+  <% end %>
+</ul>

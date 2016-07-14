@@ -8,6 +8,7 @@
 <p>
   <strong>Description:</strong>
   <%= @todolist.description %>
+  <%= link_to "New item", new_todolist_item_path(@todolist) %> 
 </p>
 
 <%= link_to 'Edit', edit_todolist_path(@todolist) %> |
