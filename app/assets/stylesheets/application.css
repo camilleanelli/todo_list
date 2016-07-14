@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+
+div.alert {
+  border: 2px solid #aaa;
+  padding: 10px;
+}
