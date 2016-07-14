@@ -9,7 +9,6 @@ describe 'deleting todolist' do
     within "#todolist_#{todolist.id}" do
       click_link 'Destroy'
     end
-
     expect(page).to_not have_content(todolist.title)
 
   end
