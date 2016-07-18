@@ -26,6 +26,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include TodolistHelper, type: :feature
 
   # ## Mock Framework
   #
