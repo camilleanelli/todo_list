@@ -2,10 +2,16 @@
 
 <ul>
   <% @todolist.items.each do |item| %>
-    <li id="<%= dom_id(item) %>"><%= item.id %> - <%= item.content %>
-    <%= link_to "Edit", edit_todolist_item_path(item) %>
-    <%= link_to "Delete", todolist_item_path(item), method: :delete, data: { confirm: "Confirmer" } %>
-    <%= link_to "Mark complete", complete_todolist_item_path(item), method: :patch %></li>
+    <li id="<%= dom_id(item) %>">
+      <% if item.completed %>
+        OK
+      <% else %>
+        <%= link_to "Validate", complete_todolist_item_path(item), method: :patch %>
+      <% end %>
+      <%= item.content %>
+      <%= link_to "Edit", edit_todolist_item_path(item) %>
+      <%= link_to "Delete", todolist_item_path(item), method: :delete, data: { confirm: "Confirmer" } %>
+    </li>
   <% end %>
 </ul>
 
