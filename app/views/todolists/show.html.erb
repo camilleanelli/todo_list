@@ -7,8 +7,12 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @todolist.description %>
-  <%= link_to "New item", new_todolist_item_path(@todolist) %> 
+  <%= @todolist.description %><br>
+  <strong>Items :</strong>
+  <% @todolist.items.each do |item| %>
+   <%= item.content %>
+  <% end %>
+  <%= link_to "New item", new_todolist_item_path(@todolist) %>
 </p>
 
 <%= link_to 'Edit', edit_todolist_path(@todolist) %> |

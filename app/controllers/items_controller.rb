@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+
   def index
     @todolist = Todolist.find(params[:todolist_id])
   end
@@ -18,6 +19,27 @@ class ItemsController < ApplicationController
         flash[:error] = "Raté!"
         render action: :new
       end
+  end
+
+  def edit
+    @todolist = Todolist.find(params[:todolist_id])
+    @item = @todolist.items.find(params[:id])
+  end
+
+  def update
+    @todolist = Todolist.find(params[:todolist_id])
+    @item = @todolist.items.find(params[:id])
+    if @item.update_attributes(params_items)
+      flash[:success] = "Saved item."
+      redirect_to todolist_items_path
+    else
+      flash[:error] = "Item could not be saved"
+      render action: :edit
+    end
+  end
+
+  def url_options
+    {todolist_id: params[:todolist_id]}.merge(super)
   end
 
   private
