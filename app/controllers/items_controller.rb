@@ -1,16 +1,13 @@
 class ItemsController < ApplicationController
-
+  before_action :find_todolist
   def index
-    @todolist = Todolist.find(params[:todolist_id])
   end
 
   def new
-    @todolist = Todolist.find(params[:todolist_id])
     @item = @todolist.items.new
   end
 
   def create
-      @todolist = Todolist.find(params[:todolist_id])
       @item = @todolist.items.new(params_items)
       if @item.save
         flash[:success] = "Produit bien ajouté!"
@@ -22,12 +19,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @todolist = Todolist.find(params[:todolist_id])
     @item = @todolist.items.find(params[:id])
   end
 
   def update
-    @todolist = Todolist.find(params[:todolist_id])
     @item = @todolist.items.find(params[:id])
     if @item.update_attributes(params_items)
       flash[:success] = "Saved item."
@@ -38,11 +33,25 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item = @item = @todolist.items.find(params[:id])
+    if @item.destroy
+      flash[:success] = "Item deleted!"
+    else
+      flash[:error] = "Could not be deleted"
+    end
+    redirect_to todolist_items_path
+  end
+
   def url_options
     {todolist_id: params[:todolist_id]}.merge(super)
   end
 
   private
+
+  def find_todolist
+    @todolist = Todolist.find(params[:todolist_id])
+  end
 
   def params_items
     params[:item].permit(:content)
