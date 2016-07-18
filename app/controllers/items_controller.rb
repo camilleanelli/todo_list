@@ -43,6 +43,12 @@ class ItemsController < ApplicationController
     redirect_to todolist_items_path
   end
 
+  def complete
+    @item = @todolist.items.find(params[:id])
+    @item.update_attribute(:completed_at, Time.now)
+    redirect_to todolist_items_path, notice: "item completed"
+  end
+
   def url_options
     {todolist_id: params[:todolist_id]}.merge(super)
   end
