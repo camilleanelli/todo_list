@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
   def complete
     @item = @todolist.items.find(params[:id])
     @item.update_attribute(:completed_at, Time.now)
-    redirect_to todolist_items_path, notice: "item completed"
+    redirect_to todolist_items_path
   end
 
   def url_options
