@@ -1,19 +1,23 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @todolist.title %></h1>
 
-<p>
-  <strong>Title:</strong>
-  <%= @todolist.title %>
-</p>
+<h2><%= @todolist.description %></h2>
 
-<p>
-  <strong>Description:</strong>
-  <%= @todolist.description %><br>
-  <strong>Items :</strong>
-  <% @todolist.items.each do |item| %>
-   <%= item.content %>
-  <% end %>
-  <%= link_to "New item", new_todolist_item_path(@todolist) %>
-</p>
+  <h3>Completed items : </h3>
+   <ul>
+     <% @todolist.items.complete.each do |item|  %>
+    <li><%= item.content %></li>
+     <% end %>
+   </ul>
+
+
+   <h3>Completed items :</h3>
+   <ul>
+     <% @todolist.items.incomplete.each do |item| %>
+     <li><%= item.content %></li>
+     <% end %>
+   </ul>
+
+<%= link_to "New item", new_todolist_item_path(@todolist) %>
 
 <%= link_to 'Edit', edit_todolist_path(@todolist) %> |
 <%= link_to 'Back', todolists_path %>
